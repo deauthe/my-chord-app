@@ -93,4 +93,44 @@
   .prose-editor u {
     @apply underline;
   }
+  
+  /* Chord Line Styling */
+  .chord-line {
+    @apply font-mono text-sm font-semibold text-primary;
+    line-height: 1.2;
+    margin-top: 0.25rem;
+    margin-bottom: 0.1rem;
+    padding: 0.125rem 0;
+    position: relative;
+    letter-spacing: 0.05em;
+  }
+  
+  .chord-line::before {
+    content: '';
+    position: absolute;
+    left: -0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.125rem;
+    height: 0.125rem;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  
+  /* Dark mode chord lines */
+  .dark .chord-line {
+    @apply text-blue-300;
+  }
+  
+  /* Ensure chord lines don't interfere with text selection */
+  .chord-line + p,
+  .chord-line + div {
+    margin-top: 0.1rem;
+  }
+  
+  /* Special spacing for chord lines followed by paragraphs */
+  .chord-line:not(:last-child) {
+    margin-bottom: 0.05rem;
+  }
 }

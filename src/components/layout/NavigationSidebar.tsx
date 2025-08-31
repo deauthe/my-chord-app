@@ -6,16 +6,22 @@ import {
   SidebarItem 
 } from './Sidebar'
 
+type AppView = 'editor' | 'chords'
+
 interface NavigationSidebarProps {
   className?: string
   collapsible?: boolean
   defaultCollapsed?: boolean
+  currentView?: AppView
+  onViewChange?: (view: AppView) => void
 }
 
 const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
   className,
   collapsible = true,
   defaultCollapsed = false,
+  currentView = 'editor',
+  onViewChange,
 }) => {
   return (
     <Sidebar
@@ -32,41 +38,83 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
       }
     >
       <SidebarContent>
+        <SidebarSection title="Apps">
+          <SidebarItem 
+            icon="📝" 
+            active={currentView === 'editor'}
+            onClick={() => onViewChange?.('editor')}
+          >
+            Text Editor
+          </SidebarItem>
+          <SidebarItem 
+            icon="🎼" 
+            active={currentView === 'chords'}
+            onClick={() => onViewChange?.('chords')}
+          >
+            Composition Manager
+          </SidebarItem>
+        </SidebarSection>
+
         <SidebarSection title="Documents">
           <SidebarItem 
             icon="📄" 
-            active={true}
+            active={false}
+            disabled={true}
           >
             Untitled Document
           </SidebarItem>
-          <SidebarItem icon="📁">
+          <SidebarItem 
+            icon="📁"
+            disabled={true}
+          >
             Recent Files
           </SidebarItem>
-          <SidebarItem icon="🗂️">
+          <SidebarItem 
+            icon="🗂️"
+            disabled={true}
+          >
             Drafts
           </SidebarItem>
         </SidebarSection>
 
         <SidebarSection title="Tools">
-          <SidebarItem icon="🔍">
+          <SidebarItem 
+            icon="🔍"
+            disabled={true}
+          >
             Search
           </SidebarItem>
-          <SidebarItem icon="📊">
+          <SidebarItem 
+            icon="📊"
+            disabled={true}
+          >
             Statistics
           </SidebarItem>
-          <SidebarItem icon="🎨">
+          <SidebarItem 
+            icon="🎨"
+            disabled={true}
+          >
             Themes
           </SidebarItem>
         </SidebarSection>
 
         <SidebarSection title="Settings">
-          <SidebarItem icon="⚙️">
+          <SidebarItem 
+            icon="⚙️"
+            disabled={true}
+          >
             Preferences
           </SidebarItem>
-          <SidebarItem icon="⌨️">
+          <SidebarItem 
+            icon="⌨️"
+            disabled={true}
+          >
             Shortcuts
           </SidebarItem>
-          <SidebarItem icon="🔗">
+          <SidebarItem 
+            icon="🔗"
+            disabled={true}
+          >
             Integrations
           </SidebarItem>
         </SidebarSection>

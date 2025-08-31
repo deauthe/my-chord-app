@@ -131,27 +131,30 @@ const SidebarItem: React.FC<{
   icon?: ReactNode
   children: ReactNode
   active?: boolean
+  disabled?: boolean
   onClick?: () => void
   className?: string
-}> = ({ icon, children, active = false, onClick, className }) => (
+}> = ({ icon, children, active = false, disabled = false, onClick, className }) => (
   <button
-    onClick={onClick}
+    onClick={disabled ? undefined : onClick}
+    disabled={disabled}
     className={cn(
       'flex items-center w-full px-2 py-2 text-sm text-left rounded-lg transition-colors',
-      'hover:bg-accent hover:text-accent-foreground',
       {
-        'bg-accent text-accent-foreground font-medium': active,
-        'text-muted-foreground': !active,
+        'hover:bg-accent hover:text-accent-foreground cursor-pointer': !disabled,
+        'bg-accent text-accent-foreground font-medium': active && !disabled,
+        'text-muted-foreground': !active && !disabled,
+        'text-muted-foreground/50 opacity-50 cursor-not-allowed': disabled,
       },
       className
     )}
   >
     {icon && (
-      <span className="mr-3 flex-shrink-0">
+      <span className={cn('mr-3 flex-shrink-0', { 'opacity-50': disabled })}>
         {icon}
       </span>
     )}
-    <span className="flex-1">{children}</span>
+    <span className={cn('flex-1', { 'opacity-50': disabled })}>{children}</span>
   </button>
 )
 
