@@ -5,8 +5,7 @@ import {
   SidebarSection, 
   SidebarItem 
 } from './Sidebar'
-
-type AppView = 'editor' | 'chords'
+import type { AppView } from '../../App'
 
 interface NavigationSidebarProps {
   className?: string
@@ -20,7 +19,7 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
   className,
   collapsible = true,
   defaultCollapsed = false,
-  currentView = 'editor',
+  currentView = 'chords',
   onViewChange,
 }) => {
   return (
@@ -32,69 +31,43 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
       className={className}
       header={
         <div>
-          <h3 className="text-lg font-semibold text-foreground">My Chord App</h3>
-          <p className="text-xs text-muted-foreground">Text Editor</p>
+          <h3 className="text-lg font-semibold text-foreground">Chortex</h3>
+          <p className="text-xs text-muted-foreground">Music Theory Engine</p>
         </div>
       }
     >
       <SidebarContent>
-        <SidebarSection title="Apps">
+        <SidebarSection title="Learn">
           <SidebarItem 
-            icon="📝" 
-            active={currentView === 'editor'}
-            onClick={() => onViewChange?.('editor')}
-          >
-            Text Editor
-          </SidebarItem>
-          <SidebarItem 
-            icon="🎼" 
+            icon="🎹" 
             active={currentView === 'chords'}
             onClick={() => onViewChange?.('chords')}
           >
-            Composition Manager
+            Chord Library
+          </SidebarItem>
+          <SidebarItem 
+            icon="🔍" 
+            active={currentView === 'identify'}
+            onClick={() => onViewChange?.('identify')}
+          >
+            Chord Identifier
           </SidebarItem>
         </SidebarSection>
 
-        <SidebarSection title="Documents">
+        <SidebarSection title="Explore">
           <SidebarItem 
-            icon="📄" 
-            active={false}
-            disabled={true}
+            icon="🎼" 
+            active={currentView === 'scales'}
+            onClick={() => onViewChange?.('scales')}
           >
-            Untitled Document
+            Scale Explorer
           </SidebarItem>
           <SidebarItem 
-            icon="📁"
-            disabled={true}
+            icon="🔢"
+            active={currentView === 'roman-numerals'}
+            onClick={() => onViewChange?.('roman-numerals')}
           >
-            Recent Files
-          </SidebarItem>
-          <SidebarItem 
-            icon="🗂️"
-            disabled={true}
-          >
-            Drafts
-          </SidebarItem>
-        </SidebarSection>
-
-        <SidebarSection title="Tools">
-          <SidebarItem 
-            icon="🔍"
-            disabled={true}
-          >
-            Search
-          </SidebarItem>
-          <SidebarItem 
-            icon="📊"
-            disabled={true}
-          >
-            Statistics
-          </SidebarItem>
-          <SidebarItem 
-            icon="🎨"
-            disabled={true}
-          >
-            Themes
+            Roman Numerals
           </SidebarItem>
         </SidebarSection>
 
@@ -110,12 +83,6 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
             disabled={true}
           >
             Shortcuts
-          </SidebarItem>
-          <SidebarItem 
-            icon="🔗"
-            disabled={true}
-          >
-            Integrations
           </SidebarItem>
         </SidebarSection>
       </SidebarContent>
